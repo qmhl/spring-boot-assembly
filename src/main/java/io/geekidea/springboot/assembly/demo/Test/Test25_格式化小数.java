@@ -3,9 +3,9 @@ package io.geekidea.springboot.assembly.demo.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.model.EarlyWarnRule;
-import com.example.demo.model.IndexEnum;
-import com.example.demo.utils.StringUtil;
+import io.geekidea.springboot.assembly.demo.model.EarlyWarnRule;
+import io.geekidea.springboot.assembly.demo.model.IndexEnum;
+import io.geekidea.springboot.assembly.demo.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -13,10 +13,6 @@ import org.springframework.util.StringUtils;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 动态生成表头

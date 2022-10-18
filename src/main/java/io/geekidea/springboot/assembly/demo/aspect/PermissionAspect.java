@@ -1,8 +1,8 @@
 package io.geekidea.springboot.assembly.demo.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.Exception.PermissionException;
-import com.example.demo.model.Father;
+import io.geekidea.springboot.assembly.demo.Exception.PermissionException;
+import io.geekidea.springboot.assembly.demo.model.Father;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -36,7 +36,7 @@ public class PermissionAspect {
 
 
     // 定义切点Pointcut--处理@PermissionAuth
-    @Pointcut("@annotation(com.example.demo.aspect.PermissionAuth)")
+    @Pointcut("@annotation(io.geekidea.springboot.assembly.demo.aspect.PermissionAuth)")
     public void pointCut() {
     }
 

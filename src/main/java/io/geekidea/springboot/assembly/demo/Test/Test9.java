@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.model.CommonResult;
+import io.geekidea.springboot.assembly.demo.model.CommonResult;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

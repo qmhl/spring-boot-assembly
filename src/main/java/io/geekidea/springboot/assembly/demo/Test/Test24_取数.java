@@ -1,13 +1,10 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.example.demo.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;

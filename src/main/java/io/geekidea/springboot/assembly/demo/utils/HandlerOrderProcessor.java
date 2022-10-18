@@ -1,7 +1,7 @@
 package io.geekidea.springboot.assembly.demo.utils;
 
-import com.example.demo.annotaion.HandlerOrderType;
-import com.example.demo.service.OrderStrategy;
+import io.geekidea.springboot.assembly.demo.annotaion.HandlerOrderType;
+import io.geekidea.springboot.assembly.demo.service.OrderStrategy;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

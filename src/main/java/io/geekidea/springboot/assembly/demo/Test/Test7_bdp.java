@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.utils.MD5Util;
+import io.geekidea.springboot.assembly.demo.utils.MD5Util;
 
 import java.text.ParseException;
 import java.util.Arrays;

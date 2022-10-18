@@ -2,10 +2,10 @@ package io.geekidea.springboot.assembly.demo.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.model.NeedRadarReqDTO;
-import com.example.demo.model.RestResponse;
-import com.example.demo.model.Son;
-import com.example.demo.utils.MD5Util;
+import io.geekidea.springboot.assembly.demo.model.NeedRadarReqDTO;
+import io.geekidea.springboot.assembly.demo.model.RestResponse;
+import io.geekidea.springboot.assembly.demo.model.Son;
+import io.geekidea.springboot.assembly.demo.utils.MD5Util;
 import com.google.common.base.Splitter;
 
 import java.text.ParseException;

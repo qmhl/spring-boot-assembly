@@ -1,25 +1,15 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.example.demo.model.DateTypeEnum;
-import com.example.demo.model.FeelInsightParam;
-import com.example.demo.utils.DateUtils;
-import com.example.demo.utils.DateUtilss;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 
 import java.io.File;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * https://blog.csdn.net/justdoit_potato/article/details/120022084
  */
 @Slf4j
-public class Test32 {
+public class Test32_file {
     private final static String EXCEL_DIR = "/export/Data/textsearch/excel/";
     private final static String DATETIME_PATTERN = "yyyyMMddHHmmssSS";
 

@@ -4,9 +4,8 @@ package io.geekidea.springboot.assembly.demo.Test;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
-import com.example.demo.model.Person;
-import com.example.demo.model.PersonMysql;
-import com.example.demo.utils.DateUtils;
+import io.geekidea.springboot.assembly.demo.model.PersonMysql;
+import io.geekidea.springboot.assembly.demo.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -15,7 +14,7 @@ import java.util.Collections;
 
 @Slf4j
 
-public class StudentDaoImpl {
+public class 原生jdbc使用2 {
 
 
     private final static String EXCEL_DIR = "src/com/example/demo/Test";
@@ -63,10 +62,7 @@ public class StudentDaoImpl {
                 String email = rs.getString("email");
                 log.info("id :{}，name：{}", id, name);
                 PersonMysql personMysql = new PersonMysql();
-                personMysql.setUuid(id);
                 personMysql.setName(name);
-                personMysql.setAddress(address);
-                personMysql.setEmail(email);
                 excelWriter.write(Collections.singletonList(personMysql), writeSheet);
                 n++;
                 if (n == pageNum * pageSize && n < total) {

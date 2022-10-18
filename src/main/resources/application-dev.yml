@@ -6,3 +6,45 @@ server:
 spring:
   application:
     name: spring-boot-assembly
+redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
+  #mysql配置
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/aiwriter?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml   #mapper映射文件位置
+  type-aliases-package: io.geekidea.springboot.assembly.demo.entity
+  configuration:
+    map-underscore-to-camel-case: true  #  mybatis帮我们把数据库字段按驼峰命名传给对应实体类字段，如果不加这个 mapper中返回值要使用resultMap，加了这个  直接resultType就会进行驼峰映射
+
+# https://www.jb51.net/article/216765.htm
+list: topic1,topic2,topic3
+maps: "{key1: 'value1', key2: 'value2'}"
+
+
+#testmap:
+#  "default": 30
+#  "[aaa:bbb:ccc_ddd]": 20
+# https://blog.csdn.net/qq_28379809/article/details/87185070?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0-87185070-blog-103230237.pc_relevant_antiscanv2&spm=1001.2101.3001.4242.1&utm_relevant_index=3
+early:
+  limitSizeMap:
+    baidu: ['百度1','百度2']
+    sogou: ['百度1','百度2']
+    hauwei: ['百度1','百度2']
+    qq: ['百度1','百度2']
+    sku: ["sku","sku名称","一级部门ID","一级部门名称","二级部门ID","二级部门名称","三级部门ID","三级部门名称","一级品类ID","一级品类名称","二级品类ID","二级品类名称","三级品类ID","三级品类名称","品牌ID","品牌名称","店铺ID","店铺名称","业务类型","采购员erp","销售员erp","POP运营人员","预警时间","预警记录ID"]
+    spu: ["sku","sku名称","一级部门ID","一级部门名称","二级部门ID","二级部门名称","三级部门ID","三级部门名称","一级品类ID","一级品类名称","二级品类ID","二级品类名称","三级品类ID","三级品类名称","品牌ID","品牌名称","店铺ID","店铺名称","业务类型","采购员erp","销售员erp","POP运营人员","预警时间","预警记录ID"]

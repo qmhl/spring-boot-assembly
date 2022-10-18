@@ -1,12 +1,12 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.model.Person;
-import com.example.demo.utils.ReflectUtil;
+
+import io.geekidea.springboot.assembly.demo.model.Person;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class Test45 {
+public class Test45_反射 {
     public static void main(String[] args) {
 
         Person p = new Person("mami", 99);
@@ -19,10 +19,10 @@ public class Test45 {
 
 //
         System.out.println("==============");
-        Object age11 = ReflectUtil.getValue(p, "age");
-        Object age22 = ReflectUtil.getValue(p2, "age");
-        System.out.println(age11);
-        System.out.println(age22);
+//        Object age11 = ReflectUtil.getValue(p, "age");
+//        Object age22 = ReflectUtil.getValue(p2, "age");
+//        System.out.println(age11);
+//        System.out.println(age22);
 
     }
 

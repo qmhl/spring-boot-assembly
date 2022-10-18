@@ -1,7 +1,7 @@
 package io.geekidea.springboot.assembly.demo.dao;
 
 
-import com.example.demo.entity.Strategy;
+import io.geekidea.springboot.assembly.demo.entity.Strategy;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

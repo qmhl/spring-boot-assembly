@@ -1,12 +1,14 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.example.demo.model.Person;
-import com.google.common.collect.Lists;
+import io.geekidea.springboot.assembly.demo.model.Person;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,7 +55,7 @@ public class Test22 {
 //        System.out.println(f);
         System.out.println(g);
 
-        List<Person> list = new ArrayList<>();
+        List<io.geekidea.springboot.assembly.demo.model.Person> list = new ArrayList<>();
 
         list.add(new Person("xx",11));
         list.add(new Person("yy",22));

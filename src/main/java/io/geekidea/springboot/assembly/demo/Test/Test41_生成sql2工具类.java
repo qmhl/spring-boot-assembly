@@ -1,8 +1,7 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.entity.Strategy;
-import com.example.demo.model.AnalyseQueryDTO;
-import com.example.demo.utils.FileUtil;
+import io.geekidea.springboot.assembly.demo.entity.Strategy;
+import io.geekidea.springboot.assembly.demo.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**

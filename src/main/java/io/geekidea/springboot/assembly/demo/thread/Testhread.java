@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.thread;
 
-import com.example.demo.service.TestService;
+import io.geekidea.springboot.assembly.demo.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

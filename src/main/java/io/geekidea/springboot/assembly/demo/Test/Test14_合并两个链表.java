@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.Exception.BusinessException;
+import io.geekidea.springboot.assembly.demo.Exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

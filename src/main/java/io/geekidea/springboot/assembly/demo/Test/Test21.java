@@ -1,18 +1,8 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.example.demo.model.F1;
-import com.example.demo.model.Person;
-import com.example.demo.model.S1;
+import io.geekidea.springboot.assembly.demo.model.Person;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 动态生成表头
@@ -35,7 +25,7 @@ public class Test21 {
 //        Person person = Person.class.newInstance();
 //        person.setAge(11);
 //        person.setName("xxx");
-        Person o = (Person) get(Person.class);
+        io.geekidea.springboot.assembly.demo.model.Person o = (Person) get(Person.class);
         o.setName("2222");
         o.setAge(33);
 //

@@ -1,7 +1,7 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.tomcat.util.ExceptionUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Slf4j
-public class Test40 {
+public class 原生jdbc使用 {
     public static final String LOG_PREFIX = "test";
     /**
      * 执行查询并保存结果
@@ -40,19 +40,15 @@ public class Test40 {
             out.flush();
             log.info("### {},匹配条件总条数{}, 文件:{}", LOG_PREFIX, n, file.getAbsolutePath());
         } catch (IOException e) {
-            log.error("### {},文件写入失败!{}, 文件：{}", LOG_PREFIX, ExceptionUtils.getStackTrace(e), file.getAbsolutePath());
             throw e;
         } catch (Exception se ) {
-            log.error("### {}, clickhouse处理失败,{}", LOG_PREFIX, ExceptionUtils.getStackTrace(se));
         } finally{
             long queryTime = System.currentTimeMillis();
             long querySeconds = (queryTime - startTime) / 1000;
-            log.info("### 挖包耗时:{}s", querySeconds);
 //            clickhouseDao.closeAll(resultSet, preparedStatement, connection);
             try {
                 out.close();
             } catch (IOException e) {
-                log.error("### {}, 结果文件关闭失败！{}",LOG_PREFIX, ExceptionUtils.getStackTrace(e));
 
             }
         }

@@ -2,7 +2,7 @@ package io.geekidea.springboot.assembly.demo.service;
 
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.model.Person;
+import io.geekidea.springboot.assembly.demo.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

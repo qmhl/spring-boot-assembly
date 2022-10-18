@@ -1,9 +1,7 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.utils.CustomFreeMarkerTemplateUtil;
-import com.example.demo.utils.FreemarkerConfigUtil;
-import com.example.demo.utils.FreemarkerGeneratorUtil;
 import freemarker.template.TemplateException;
+import io.geekidea.springboot.assembly.demo.utils.FreeMarkerTemplateUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -20,8 +18,8 @@ public class Test46_freemarker_邮件 {
         Map<String, Object> templateData = new HashMap<>(16);
         templateData.put("taskName", "任务名称001");
         templateData.put("name", "张三");
-        String template = FreemarkerConfigUtil.getTemplate(templateData);
-        System.out.println(template);
+//        String template = FreeMarkerTemplateUtil.getTemplate(templateData);
+//        System.out.println(template);
     }
 }
 

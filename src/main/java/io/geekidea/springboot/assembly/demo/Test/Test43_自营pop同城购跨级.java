@@ -1,14 +1,14 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.model.BusinessTypeLevel;
+import io.geekidea.springboot.assembly.demo.model.BusinessTypeLevel;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
 
 @Slf4j
-public class Test43 {
+public class Test43_自营pop同城购跨级 {
 
     public static void main(String[] args) {
         List<List<String>> commonList = Arrays.asList(Arrays.asList("自营", "标准自营"), Arrays.asList("pop"), Arrays.asList("同城购"));

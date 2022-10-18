@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.controller;
 
-import com.example.demo.service.TestService;
+import io.geekidea.springboot.assembly.demo.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

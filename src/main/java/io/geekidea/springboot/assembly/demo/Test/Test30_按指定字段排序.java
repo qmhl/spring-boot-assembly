@@ -2,9 +2,8 @@ package io.geekidea.springboot.assembly.demo.Test;
 
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.model.Person;
-import com.example.demo.model.PersonInsightSqlResDTO;
-import com.example.demo.utils.DimSortUtil;
+import io.geekidea.springboot.assembly.demo.model.PersonInsightSqlResDTO;
+import io.geekidea.springboot.assembly.demo.utils.DimSortUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
  * https://blog.csdn.net/justdoit_potato/article/details/120022084
  */
 @Slf4j
-public class Test30 {
+public class Test30_按指定字段排序 {
 
 
     public static void main(String[] args) throws Exception {

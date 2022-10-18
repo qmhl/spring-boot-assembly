@@ -1,7 +1,7 @@
 package io.geekidea.springboot.assembly.demo.service;
 
-import com.example.demo.annotaion.HandlerOrderType;
-import com.example.demo.constant.OrderType;
+import io.geekidea.springboot.assembly.demo.annotaion.HandlerOrderType;
+import io.geekidea.springboot.assembly.demo.constant.OrderType;
 import org.springframework.stereotype.Component;
 
 /**

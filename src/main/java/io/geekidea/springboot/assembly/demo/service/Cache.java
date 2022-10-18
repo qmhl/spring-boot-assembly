@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.service;
 
-import com.example.demo.model.Entry;
+import io.geekidea.springboot.assembly.demo.model.Entry;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;

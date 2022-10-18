@@ -1,8 +1,8 @@
 package io.geekidea.springboot.assembly.demo.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.service.TestService;
-import com.example.demo.thread.TestUtils;
+import io.geekidea.springboot.assembly.demo.service.TestService;
+import io.geekidea.springboot.assembly.demo.thread.TestUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

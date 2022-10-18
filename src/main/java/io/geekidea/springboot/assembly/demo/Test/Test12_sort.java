@@ -1,11 +1,11 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.entity.ActiveExtendDTO;
-import com.example.demo.entity.Apple;
-import com.example.demo.model.Person;
-import com.example.demo.model.PersonInsightSqlResDTO;
-import com.example.demo.utils.DimSortUtil;
+import io.geekidea.springboot.assembly.demo.entity.ActiveExtendDTO;
+import io.geekidea.springboot.assembly.demo.entity.Apple;
+import io.geekidea.springboot.assembly.demo.model.Person;
+import io.geekidea.springboot.assembly.demo.model.PersonInsightSqlResDTO;
+import io.geekidea.springboot.assembly.demo.utils.DimSortUtil;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
 

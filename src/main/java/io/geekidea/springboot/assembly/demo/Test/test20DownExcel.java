@@ -4,8 +4,8 @@ package io.geekidea.springboot.assembly.demo.Test;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
-import com.example.demo.model.Person;
-import com.example.demo.utils.DateUtils;
+import io.geekidea.springboot.assembly.demo.model.Person;
+import io.geekidea.springboot.assembly.demo.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class Test20_down_excel {
+public class test20DownExcel {
     private final static String EXCEL_DIR = "src/com/example/demo/Test";
 
     private final static String DATETIME_PATTERN = "yyyyMMddHHmmssSS";

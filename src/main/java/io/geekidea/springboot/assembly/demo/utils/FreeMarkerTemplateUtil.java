@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class FreeMarkerTemplateUtil {
 
-    public String getEmailHtml(Map map, String templateName) {
+    public static String  getEmailHtml(Map map, String templateName) {
 
         String htmlText = "";
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_27);
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_23);
         try {
             //加载模板路径
             configuration.setClassLoaderForTemplateLoading(ClassLoader.getSystemClassLoader(),"ftl");
@@ -44,9 +44,9 @@ public class FreeMarkerTemplateUtil {
      * @param name 模板名
      * @return
      */
-    public Template getTemplate(String name) {
+    public static Template getTemplate(String name) {
         //通过freemarkerd Configuration读取相应的ftl
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_25);
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
         //设定去哪里读取相应的ftl模板文件，指定模板路径
         cfg.setClassLoaderForTemplateLoading(ClassLoader.getSystemClassLoader(), "ftl");
         try {

@@ -1,20 +1,16 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.alibaba.fastjson.JSON;
-import com.jd.gms.crs.enums.ProductBaseFieldEnum;
-import com.jd.gms.crs.model.CrsResult;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.MapUtils;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * https://blog.csdn.net/justdoit_potato/article/details/120022084
  */
 @Slf4j
-public class Test34 {
+public class Test34_list做分页 {
     private final static String EXCEL_DIR = "/export/Data/textsearch/excel/";
     private final static String DATETIME_PATTERN = "yyyyMMddHHmmssSS";
 

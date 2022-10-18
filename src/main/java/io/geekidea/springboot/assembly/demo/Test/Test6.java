@@ -1,9 +1,9 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.model.Father;
-import com.example.demo.model.Person;
-import com.example.demo.model.Son;
+import io.geekidea.springboot.assembly.demo.model.Father;
+import io.geekidea.springboot.assembly.demo.model.Person;
+import io.geekidea.springboot.assembly.demo.model.Son;
 
 import java.text.ParseException;
 import java.util.ArrayList;

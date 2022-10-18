@@ -1,8 +1,8 @@
 package io.geekidea.springboot.assembly.demo.controller;
 
 
-import com.example.demo.dao.CustomPriceDetailMapper;
-import com.example.demo.model.CustomPriceDetail;
+import io.geekidea.springboot.assembly.demo.dao.CustomPriceDetailMapper;
+import io.geekidea.springboot.assembly.demo.model.CustomPriceDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.service;
 
-import com.example.demo.utils.HandlerOrderContext;
+import io.geekidea.springboot.assembly.demo.utils.HandlerOrderContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

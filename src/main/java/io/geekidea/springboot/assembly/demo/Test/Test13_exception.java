@@ -1,7 +1,7 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.example.demo.Exception.BusinessException;
-import com.example.demo.entity.ActiveExtendDTO;
+import io.geekidea.springboot.assembly.demo.Exception.BusinessException;
+import io.geekidea.springboot.assembly.demo.entity.ActiveExtendDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.SelectKey;
 

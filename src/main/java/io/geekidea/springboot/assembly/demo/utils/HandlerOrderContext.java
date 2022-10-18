@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.utils;
 
-import com.example.demo.service.OrderStrategy;
+import io.geekidea.springboot.assembly.demo.service.OrderStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

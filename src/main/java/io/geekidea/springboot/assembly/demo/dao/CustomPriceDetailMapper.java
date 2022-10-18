@@ -1,6 +1,6 @@
 package io.geekidea.springboot.assembly.demo.dao;
 
-import com.example.demo.model.CustomPriceDetail;
+import io.geekidea.springboot.assembly.demo.model.CustomPriceDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

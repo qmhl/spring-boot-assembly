@@ -1,9 +1,9 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
-import com.example.demo.model.DateTypeEnum;
-import com.example.demo.model.FeelInsightParam;
-import com.example.demo.utils.DateUtilss;
+import io.geekidea.springboot.assembly.demo.model.DateTypeEnum;
+import io.geekidea.springboot.assembly.demo.model.FeelInsightParam;
+import io.geekidea.springboot.assembly.demo.utils.DateUtilss;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
