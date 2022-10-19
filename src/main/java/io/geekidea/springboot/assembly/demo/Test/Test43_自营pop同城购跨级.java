@@ -3,6 +3,7 @@ package io.geekidea.springboot.assembly.demo.Test;
 import com.alibaba.fastjson.JSON;
 import io.geekidea.springboot.assembly.demo.model.BusinessTypeLevel;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
 
@@ -11,85 +12,72 @@ import java.util.*;
 public class Test43_自营pop同城购跨级 {
 
     public static void main(String[] args) {
-        List<List<String>> commonList = Arrays.asList(Arrays.asList("自营", "标准自营"), Arrays.asList("pop"), Arrays.asList("同城购"));
+        List<List<String>> commonList = Arrays.asList(Arrays.asList("自营", "标准自营"), Arrays.asList("pop"),
+                Arrays.asList("全渠道"),Arrays.asList("全渠道","京超"));
         Map<String, List<List<String>>> map = splitList(commonList);
         log.info(JSON.toJSONString(map));
-        log.info("=============");
+        System.out.println("=============");
 //        BusinessTypeLevel businessTypeLevel = getBusinessLevel(commonList);
         BusinessTypeLevel businessTypeLevel = getBusinessLevel(map.get("pop"));
-        BusinessTypeLevel businessTypeLevel2 = getBusinessLevel(map.get("localShopping"));
-        log.info(JSON.toJSONString(businessTypeLevel));
-        log.info(JSON.toJSONString(businessTypeLevel2));
+        BusinessTypeLevel businessTypeLevel2 = getBusinessLevel(map.get("allChannel"));
+        System.out.println(JSON.toJSONString(businessTypeLevel));
+
+        System.out.println("======全渠道=======");
+
+        System.out.println(JSON.toJSONString(businessTypeLevel2));
 
 
     }
 
 
     public static BusinessTypeLevel getBusinessLevel(List<List<String>> commonList) {
-        int level = 0;
-        //分组 1级和二级：
-        List<String> list1 = new LinkedList<>();
-        List<String> list2 = new LinkedList<>();
 
-        //同城购及自营pop
-        List<List<String>> localShoppingList = new LinkedList<>();
-        List<List<String>> popList = new LinkedList<>();
-        for (int i = 0; i < commonList.size(); i++) {
-            if (commonList.get(i).contains("同城购")) {
-                localShoppingList.add(commonList.get(i));
-            } else {
-                popList.add(commonList.get(i));
-            }
-
+        if (CollectionUtils.isEmpty(commonList)) {
+            return null;
         }
 
+        int level = 1;
+        List<String> list1 = new LinkedList<>();
+        List<String> list2 = new LinkedList<>();
         // size :1 没跨级 都是1级  2：没跨级 都是2级 -1：跨级
-        int size = commonList.get(0).size();
-
-        for (int i = 0; i < commonList.size(); i++) {
-            if (commonList.get(i).size() == size) {
+        for (int i = 1; i < commonList.size(); i++) {
+            if (commonList.get(i).size() == commonList.get(0).size()) {
                 level = commonList.get(0).size();
             } else {
                 level = -1;
             }
         }
-
-        System.out.println(level == -1 ? "跨级" : level + "级");
-        //  分组1级和2级
         //跨级
-        if (level == -1) {
-            for (int i = 0; i < commonList.size(); i++) {
-                if (commonList.get(i).size() == 1) {
-                    list1.add(commonList.get(i).get(0));
-                }
-                if (commonList.get(i).size() == 2) {
-                    list2.add(commonList.get(i).get(1));
-                }
+        for (int i = 0; i < commonList.size(); i++) {
+            if (commonList.get(i).size() == 1) {
+                list1.add(commonList.get(i).get(0));
             }
-            System.out.println(" 跨级 list1 " + list1);
-            System.out.println(" 跨级 list2 " + list2);
-        } else {
-            System.out.println(" 不跨级 size:  " + level);
-
+            if (commonList.get(i).size() == 2) {
+                list2.add(commonList.get(i).get(1));
+            }
         }
 
         BusinessTypeLevel businessTypeLevel = new BusinessTypeLevel();
         businessTypeLevel.setLevel(level);
         businessTypeLevel.setLevel1List(list1);
         businessTypeLevel.setLevel2List(list2);
-
         return businessTypeLevel;
-
     }
 
+    /**
+     * 将入参中的业务类型分割成自营pop及 同城购两部分
+     *
+     * @param commonList
+     * @return
+     */
     public static Map<String, List<List<String>>> splitList(List<List<String>> commonList) {
 
-        //同城购及自营pop
-        List<List<String>> localShoppingList = new LinkedList<>();
+        //全渠道、自营pop的List
+        List<List<String>> allChannelList = new LinkedList<>();
         List<List<String>> popList = new LinkedList<>();
         for (int i = 0; i < commonList.size(); i++) {
-            if (commonList.get(i).contains("同城购")) {
-                localShoppingList.add(commonList.get(i));
+            if (commonList.get(i).contains("全渠道")) {
+                allChannelList.add(commonList.get(i));
             } else {
                 popList.add(commonList.get(i));
             }
@@ -97,8 +85,7 @@ public class Test43_自营pop同城购跨级 {
         }
         Map<String, List<List<String>>> map = new HashMap<>();
         map.put("pop", popList);
-        map.put("localShopping", localShoppingList);
-
+        map.put("allChannel", allChannelList);
         return map;
     }
 }
