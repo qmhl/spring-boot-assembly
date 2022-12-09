@@ -3,49 +3,54 @@ package io.geekidea.springboot.assembly.demo.Test;
 import com.alibaba.fastjson.JSON;
 import io.geekidea.springboot.assembly.demo.model.BusinessTypeLevel;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 
+import java.text.DecimalFormat;
 import java.util.*;
-
+import java.util.stream.Collectors;
 
 @Slf4j
-public class Test43_自营pop同城购跨级 {
-    //Arrays.asList(Arrays.asList("自营"), Arrays.asList("自营","厂直"),Arrays.asList("pop","popsop")
-//                ,Arrays.asList("全渠道","商超"));
+public class Test58_跨级 {
+    public static final String YOY_MOM = "--";
+    public static final String NAN = "nan";
+
+
     public static void main(String[] args) {
-        List<List<String>> commonList = Arrays.asList(Arrays.asList("自营"),Arrays.asList("全渠道"),Arrays.asList("自营","标准"));
+        List<List<String>> commonList = Arrays.asList(Arrays.asList("自营"), Arrays.asList("自营", "厂直"), Arrays.asList("自营", "标准"));
+//        List<List<String>> commonList = Arrays.asList(Arrays.asList("全渠道"));
+
         Map<String, List<List<String>>> map = splitList(commonList);
-        log.info(JSON.toJSONString(map));
-        System.out.println("=============");
-//        BusinessTypeLevel businessTypeLevel = getBusinessLevel(commonList);
-        BusinessTypeLevel businessTypeLevel = getBusinessLevel(map.get("pop"));
-        BusinessTypeLevel businessTypeLevel2 = getBusinessLevel(map.get("allChannel"));
-        System.out.println(JSON.toJSONString(businessTypeLevel));
+        BusinessTypeLevel popLevel = getBusinessLevel(map.get("pop"));
+        BusinessTypeLevel allChannelLevel = getBusinessLevel(map.get("allChannel"));
+        System.out.println(JSON.toJSONString(popLevel));
 
-        System.out.println("======全渠道=======");
+        System.out.println("===============");
 
-        System.out.println(JSON.toJSONString(businessTypeLevel2));
-
+        System.out.println(JSON.toJSONString(allChannelLevel));
 
     }
 
-
     public static BusinessTypeLevel getBusinessLevel(List<List<String>> commonList) {
-
-        if (CollectionUtils.isEmpty(commonList)) {
+        log.info("getBusinessLevel commonList :{}", JSON.toJSONString(commonList));
+        if (org.apache.commons.collections4.CollectionUtils.isEmpty(commonList)) {
             return null;
         }
 
         int level = 1;
         List<String> list1 = new LinkedList<>();
         List<String> list2 = new LinkedList<>();
-        // size :1 没跨级 都是1级  2：没跨级 都是2级 -1：跨级
-        for (int i = 0; i < commonList.size(); i++) {
-            if (commonList.get(i).size() == commonList.get(0).size()) {
-                level = commonList.get(0).size();
+        List<Integer> collect = commonList.stream().map(o -> o.size()).distinct().collect(Collectors.toList());
+        //size :1 说明每个二维数组元素个数相同
+        if (collect.size() == 1) {
+            // 值都是1  ，都是1级
+            if (collect.get(0) == 1) {
+                level = 1;
             } else {
-                level = -1;
+                // 都是2级
+                level = 2;
             }
+        } else {
+            // 跨级
+            level = -1;
         }
         //跨级
         for (int i = 0; i < commonList.size(); i++) {
@@ -64,12 +69,6 @@ public class Test43_自营pop同城购跨级 {
         return businessTypeLevel;
     }
 
-    /**
-     * 将入参中的业务类型分割成自营pop及 同城购两部分
-     *
-     * @param commonList
-     * @return
-     */
     public static Map<String, List<List<String>>> splitList(List<List<String>> commonList) {
 
         //全渠道、自营pop的List
@@ -88,4 +87,8 @@ public class Test43_自营pop同城购跨级 {
         map.put("allChannel", allChannelList);
         return map;
     }
+
 }
+
+
+

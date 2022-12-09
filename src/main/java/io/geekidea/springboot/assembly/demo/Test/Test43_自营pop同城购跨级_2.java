@@ -9,22 +9,19 @@ import java.util.*;
 
 
 @Slf4j
-public class Test43_自营pop同城购跨级 {
+public class Test43_自营pop同城购跨级_2 {
     //Arrays.asList(Arrays.asList("自营"), Arrays.asList("自营","厂直"),Arrays.asList("pop","popsop")
 //                ,Arrays.asList("全渠道","商超"));
     public static void main(String[] args) {
         List<List<String>> commonList = Arrays.asList(Arrays.asList("自营"),Arrays.asList("全渠道"),Arrays.asList("自营","标准"));
+
         Map<String, List<List<String>>> map = splitList(commonList);
-        log.info(JSON.toJSONString(map));
-        System.out.println("=============");
-//        BusinessTypeLevel businessTypeLevel = getBusinessLevel(commonList);
-        BusinessTypeLevel businessTypeLevel = getBusinessLevel(map.get("pop"));
-        BusinessTypeLevel businessTypeLevel2 = getBusinessLevel(map.get("allChannel"));
-        System.out.println(JSON.toJSONString(businessTypeLevel));
+        BusinessTypeLevel popLevel = getBusinessLevel(map.get("pop"));
+        BusinessTypeLevel allChannelLevel = getBusinessLevel(map.get("allChannel"));
 
-        System.out.println("======全渠道=======");
-
-        System.out.println(JSON.toJSONString(businessTypeLevel2));
+        System.out.println(JSON.toJSONString(popLevel));
+        System.out.println("======全渠===========");
+        System.out.println(JSON.toJSONString(allChannelLevel));
 
 
     }
