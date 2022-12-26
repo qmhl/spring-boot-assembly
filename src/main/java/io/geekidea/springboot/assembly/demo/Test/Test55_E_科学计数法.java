@@ -14,7 +14,8 @@ public class Test55_E_科学计数法 {
     public static void main(String[] args) throws IOException, ParseException {
 //        java科学计数法转换成普通计数法:
 //        String sjiachun = "12345E-10";
-        String sjiachun = "4.390039658520765E-6";
+//        String sjiachun = "4.5097489E7";
+        String sjiachun = "1.0345609E7";
         BigDecimal db = new BigDecimal(sjiachun);
         String ii = db.toPlainString();
         System.out.println(ii);

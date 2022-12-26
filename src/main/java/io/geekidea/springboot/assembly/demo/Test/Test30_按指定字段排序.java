@@ -41,14 +41,15 @@ public class Test30_按指定字段排序 {
 
         List<PersonInsightSqlResDTO> postList = new ArrayList<>();
         //"一线", "二线", "三线", "四线", "五线", "六线-1"
+        postList.add(new PersonInsightSqlResDTO("post", "四线", 444d, 22d));
         postList.add(new PersonInsightSqlResDTO("post", "一线", 111d, 22d));
         postList.add(new PersonInsightSqlResDTO("post", "二线", 333d, 22d));
         postList.add(new PersonInsightSqlResDTO("post", "三线", 555d, 22d));
         postList.add(new PersonInsightSqlResDTO("post", "五线", 222d, 22d));
         postList.add(new PersonInsightSqlResDTO("post", "六线-1", 666d, 22d));
         method2(preList);
-        customSortList(preList, "pre","cityLevel");
-        log.info("排序后的{}", JSON.toJSONString(preList));
+//        customSortList(preList, "pre","cityLevel");
+//        log.info("排序后的{}", JSON.toJSONString(preList));
 
         customSortList(postList, "post","cityLevel");
         log.info("排序后的{}", JSON.toJSONString(postList));

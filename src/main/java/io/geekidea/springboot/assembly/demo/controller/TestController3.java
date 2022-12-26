@@ -6,7 +6,9 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.WriteTable;
+import com.alibaba.fastjson.JSON;
 import io.geekidea.springboot.assembly.demo.dao.StrategyMapper;
+import io.geekidea.springboot.assembly.demo.entity.Apple;
 import io.geekidea.springboot.assembly.demo.entity.Strategy;
 import io.geekidea.springboot.assembly.demo.model.RestResponse;
 import com.github.pagehelper.PageHelper;
@@ -15,8 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -32,18 +33,12 @@ import java.util.zip.ZipOutputStream;
 @RequestMapping("/test3")
 @Slf4j
 public class TestController3 {
-    @Autowired
-    private StrategyMapper strategyMapper;
 
 
-    @RequestMapping("/query")
-    public RestResponse query() throws IOException {
-        int pageNum = 1;
-        int pageSize = 1;
-        PageHelper.startPage(pageNum, pageSize);
-        Strategy strategy = new Strategy();
-        List<Strategy> list = strategyMapper.selectBySelective(strategy);
-        return RestResponse.ok(list);
+    @PostMapping("/query")
+    public RestResponse query(@RequestParam("id") Long id, @RequestBody List<Apple> apple) throws IOException {
+        log.info(" test  >>>{}", JSON.toJSONString(apple));
+        return RestResponse.ok(id + ": " + JSON.toJSONString(apple));
     }
 
 
