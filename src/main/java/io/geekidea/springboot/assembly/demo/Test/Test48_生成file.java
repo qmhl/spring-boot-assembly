@@ -1,9 +1,12 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
 
+import io.geekidea.springboot.assembly.demo.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class Test48_生成file {
@@ -12,8 +15,16 @@ public class Test48_生成file {
 
     public static void main(String[] args) {
 
-        String dirStr = "D:\\data111\\test";
-        testCreateDir1(FILE_DIR);
+//        String dirStr = "D:\\data111\\test";
+//        testCreateDir1(FILE_DIR);
+
+//        String  dirPath="/Users/zhangqi1092/Documents/文档/excel/";
+//        FileUtil.delAllFile(dirPath);
+
+        List<String> list = new ArrayList<>();
+        list.add("/Users/zhangqi1092/Documents/文档/excel/1667008435370.xlsx");
+        list.add("/Users/zhangqi1092/Documents/文档/excel/1666957820130.xlsx");
+        FileUtil.removeFile(list);
     }
 
     public static void testCreateDir1(String dirStr) {

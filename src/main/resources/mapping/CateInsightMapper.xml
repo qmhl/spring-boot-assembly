@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jd.qmx.promotool.dao.clickhousemap.businessdig.CateInsightMapper">
+
+
+    <!-- 过滤条件-->
+    <sql id="whereScript">
+        <where>
+            <if test="dt != null and dt!='' ">
+                and `dt` = #{dt}
+            </if>
+            <if test="time != null">
+                and date_region=#{time}
+            </if>
+            <if test="level ==1 and  cateIdList != null and cateIdList.size() > 0">
+                and `cid1` in
+                <foreach collection="cateIdList" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="level ==2 and  cateIdList != null and cateIdList.size() > 0">
+                and `cid2` in
+                <foreach collection="cateIdList" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="level ==3 and  cateIdList != null and cateIdList.size() > 0">
+                and `cid3` in
+                <foreach collection="cateIdList" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="brandIdList != null and brandIdList.size() > 0 ">
+                and `brand_id` in
+                <foreach collection="brandIdList" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+
+        </where>
+    </sql>
+
+
+    <!--动态获取品类信息cid cid_name的sql-->
+    <sql id="group_by_cid_column">
+        <if test="level ==0 or level == null">
+            cid1,cid1_name
+        </if>
+        <if test="level ==1">
+            cid2,cid2_name
+        </if>
+        <if test="level ==2">
+            cid3,cid3_name
+        </if>
+        <if test="level ==3">
+            cidN,cidN_name
+        </if>
+    </sql>
+
+    <sql id="select_cid_column">
+        <if test="level ==0 or level == null">
+            cid1 as cid,cid1_name as cid_name,
+        </if>
+        <if test="level ==1">
+            cid2 as cid,cid2_name as cid_name,
+        </if>
+        <if test="level ==2">
+            cid3 as cid,cid3_name as cid_name,
+        </if>
+        <if test="level ==3">
+            cidN as cid,cidN_name as cid_name,
+        </if>
+    </sql>
+
+    <!--  取市场规模的avg(lnx)， 用作归一的分母-->
+    <select id="selectGmvForAvgInfo" parameterType="com.jd.qmx.promotool.model.cateinsight.request.CateInsightSqlDTO"
+            resultType="com.jd.qmx.promotool.model.cateinsight.response.CateInsightAvgInfo">
+        select
+            avg(case when gmv =0 then 0 else ln(gmv+1) end ) as avg_gmv_index
+        from (
+            select
+                sum(market_gmv) as gmv
+            from
+                sjwj_cate_insight
+                <!-- 过滤条件-->
+                <include refid="whereScript"/>
+            group by
+                <include refid="group_by_cid_column"/>
+        ) AS A
+
+    </select>
+
+    <!--  取市场增速的avg(lnx)， 用作归一的分母 参考公式：if(x<0,-ln((-x)+1),ln(x+1))-->
+    <select id="selectGmvSpeedRatioForAvgInfo"
+            parameterType="com.jd.qmx.promotool.model.cateinsight.request.CateInsightSqlDTO"
+            resultType="com.jd.qmx.promotool.model.cateinsight.response.CateInsightAvgInfo">
+        select
+            avg(case when B.h_gmv_speed_ratio =0 then 0 when B.h_gmv_speed_ratio &lt; 0 then -ln(abs(B.h_gmv_speed_ratio)+1) else ln(B.h_gmv_speed_ratio+1) end ) as h_avg_gmv_speed_ratio_index,
+            avg(case when B.t_gmv_speed_ratio =0 then 0 when B.t_gmv_speed_ratio &lt; 0 then -ln(abs(B.t_gmv_speed_ratio)+1) else ln(B.t_gmv_speed_ratio+1) end ) as t_avg_gmv_speed_ratio_index
+        from (
+            select
+                A.gmv,
+                (case when (A.gmv>0 and A.h_gmv=0) then A.gmv when (A.gmv=0 and A.h_gmv=0) then 0 else (A.gmv-A.h_gmv)/A.h_gmv end ) as h_gmv_speed_ratio,
+                (case when (A.gmv>0 and A.t_gmv=0) then A.gmv when (A.gmv=0 and A.t_gmv=0) then 0 else (A.gmv-A.t_gmv)/A.t_gmv end ) as t_gmv_speed_ratio
+            from (
+                select
+                    sum(market_gmv) as gmv,
+                    sum(market_gmv_week) as h_gmv,
+                    sum(market_gmv_same_period) as t_gmv
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+                group by
+                    <include refid="group_by_cid_column"/>
+            ) AS A
+        ) as B
+
+    </select>
+
+
+    <!--  ratioType =='MoM': 环比；ratioType =='YoY': 同比   -->
+    <sql id="gmvSpeedRatio_sql">
+        <if test="ratioType =='MoM' ">
+            ROUND(
+            (case when B.h_gmv_speed_ratio=0 then 0
+            when B.h_avg_gmv_speed_ratio_index=0 then B.h_gmv_speed_ratio
+            when B.h_gmv_speed_ratio &lt; 0 then -ln(abs(B.h_gmv_speed_ratio)+1)/abs(B.h_avg_gmv_speed_ratio_index) * 100
+            else ln(B.h_gmv_speed_ratio+1)/abs(B.h_avg_gmv_speed_ratio_index) * 100 end ),2)
+        </if>
+        <if test="ratioType =='YoY' ">
+            ROUND(
+            (case when B.t_gmv_speed_ratio=0 then 0
+            when B.t_avg_gmv_speed_ratio_index=0 then B.t_gmv_speed_ratio
+            when B.t_gmv_speed_ratio &lt; 0 then -ln(abs(t_gmv_speed_ratio)+1)/abs(B.t_avg_gmv_speed_ratio_index) * 100
+            else ln(B.t_gmv_speed_ratio+1)/abs(B.t_avg_gmv_speed_ratio_index) * 100 end ),2)
+        </if>
+
+    </sql>
+    <!-- 市场规模增速的真实值 ratioType =='MoM': 环比；ratioType =='YoY': 同比   -->
+    <sql id="gmvSpeedRatioReal_sql">
+        <if test="ratioType =='MoM' ">
+            ROUND(B.h_gmv_speed_ratio,4)
+        </if>
+        <if test="ratioType =='YoY' ">
+            ROUND(B.t_gmv_speed_ratio,4)
+        </if>
+    </sql>
+
+
+    <!--  品类地图-->
+    <select id="selectForCateMap" parameterType="com.jd.qmx.promotool.model.cateinsight.request.CateInsightSqlDTO"
+            resultType="com.jd.qmx.promotool.model.cateinsight.response.CateInsightCharShowData">
+
+        select
+            B.cid as id,
+            B.cid_name as name,
+            ROUND((case when B.avg_gmv_index=0 then ln(B.gmv+1)*100  when B.gmv=0 then 0 else ln(B.gmv+1)/B.avg_gmv_index * 100 end ),2) as gmvIndex,
+            <include refid="gmvSpeedRatio_sql"/> as gmvSpeedRatio,
+            <include refid="gmvSpeedRatioReal_sql"/> as realGmvSpeedRatio,
+            ROUND( ln(B.sales_count+1), 2) as saleCount,
+            ROUND( B.unit_price, 2) as unitPrice
+        from (
+            select
+                A.cid,
+                A.cid_name,
+                A.gmv,
+                (case when (A.gmv>0 and A.h_gmv=0) then A.gmv when (A.gmv=0 and A.h_gmv=0) then 0 else (A.gmv-A.h_gmv)/A.h_gmv end ) as h_gmv_speed_ratio,
+                (case when (A.gmv>0 and A.t_gmv=0) then A.gmv when (A.gmv=0 and A.t_gmv=0) then 0 else (A.gmv-A.t_gmv)/A.t_gmv end ) as t_gmv_speed_ratio,
+                A.sales_count,
+                (case when A.sales_count=0 then 0 else A.gmv/A.sales_count end ) as unit_price,
+                A.avg_gmv_index,
+                A.h_avg_gmv_speed_ratio_index,
+                A.t_avg_gmv_speed_ratio_index
+            from (
+                select
+                    <include refid="select_cid_column"/>
+                    sum(market_gmv) as gmv,
+                    sum(market_gmv_week) as h_gmv,
+                    sum(market_gmv_same_period) as t_gmv,
+                    sum(sales_count) as sales_count,
+                    ${avgGmvIndex} as avg_gmv_index,
+                    ${hAvgGmvSpeedRatioIndex} as h_avg_gmv_speed_ratio_index,
+                    ${tAvgGmvSpeedRatioIndex} as t_avg_gmv_speed_ratio_index
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+                group by
+                    <include refid="group_by_cid_column"/>
+            ) AS A
+        ) AS B
+
+    </select>
+
+
+    <!-- 获取TOP400的品牌id
+    TOP取法：
+    市场规模排名=对市场规模进行降序排名
+    市场增速排名=对市场规模占比>0.01%的市场增速进行降序排名
+    取综合排名TOP400，综合排名=市场规模排名+市场增速排名    -->
+
+
+    <sql id="gmvSpeedRatio_sql_2">
+        <if test="ratioType =='MoM' ">
+            (case when (A.gmv>0 and A.h_gmv=0) then A.gmv when (A.gmv=0 and A.h_gmv=0) then 0 else (A.gmv-A.h_gmv)/A.h_gmv  end )
+        </if>
+        <if test="ratioType =='YoY' ">
+            (case when (A.gmv>0 and A.t_gmv=0) then A.gmv when (A.gmv=0 and A.t_gmv=0) then 0 else (A.gmv-A.t_gmv)/A.t_gmv  end )
+        </if>
+    </sql>
+
+
+    <!--市场规模排名-->
+    <sql id="gmvRank">
+            SELECT
+                A.brand_id as brandId,
+                A.gmv as gmv,
+                rank() OVER w AS rank
+            FROM (
+                select
+                    brand_id,
+                    sum(market_gmv) as gmv
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+                group by brand_id
+            ) AS A
+            WINDOW w AS (ORDER BY A.gmv DESC )
+            SETTINGS allow_experimental_window_functions = 1
+    </sql>
+
+    <!--市场增速排名-->
+    <sql id="gmvSpeedRatioRank">
+
+        SELECT
+            C.brand_id as brandId,
+            C.gmv_speed_ratio as gmvSpeedRatio,
+            rank() OVER w AS rank
+        FROM (
+            select
+                A.brand_id,
+                A.gmv,
+                <include refid="gmvSpeedRatio_sql_2"/> as gmv_speed_ratio
+            from (
+                select
+                    brand_id,
+                    sum(market_gmv) as gmv,
+                    sum(market_gmv_week) as h_gmv,
+                    sum(market_gmv_same_period) as t_gmv,
+                    'key' as key
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+                group by brand_id
+            ) AS A
+            global inner join
+            (
+                select
+                    sum(market_gmv) as totalGmv,
+                    'key' as key
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+            ) AS B
+            on A.key = B.key and B.totalGmv >0
+            where A.gmv/B.totalGmv  > 0.0001
+        ) as C
+        WINDOW w AS (ORDER BY C.gmv_speed_ratio DESC )
+        SETTINGS allow_experimental_window_functions = 1
+    </sql>
+
+
+    <!--  获取TOP400的品牌信息-->
+    <select id="selectBrand" parameterType="com.jd.qmx.promotool.model.cateinsight.request.CateInsightSqlDTO"
+            resultType="java.lang.Integer">
+        select
+            D.brandId
+        from (<include refid="gmvRank" />) AS D
+        global inner join (<include refid="gmvSpeedRatioRank" />) AS E
+        on D.brandId=E.brandId
+        order by D.rank + E.rank asc
+        limit 400
+
+    </select>
+
+
+    <!--  品牌地图-->
+    <select id="selectForBrandMap" parameterType="com.jd.qmx.promotool.model.cateinsight.request.CateInsightSqlDTO"
+            resultType="com.jd.qmx.promotool.model.cateinsight.response.CateInsightCharShowData">
+
+
+        select
+            B.brand_id as id,
+            B.brand as name,
+            ROUND((case when B.avg_gmv_index=0 then  ln(B.gmv+1)*100 when B.gmv=0 then 0 else ln(B.gmv+1)/B.avg_gmv_index * 100 end ),2) as gmvIndex,
+            <include refid="gmvSpeedRatio_sql"/>  as gmvSpeedRatio,
+            <include refid="gmvSpeedRatioReal_sql"/> as realGmvSpeedRatio,
+        ROUND( ln(B.sales_count+1), 2) as saleCount,
+            ROUND( B.unit_price,2 ) as unitPrice
+        from (
+            select
+                A.brand,
+                A.brand_id,
+                A.gmv,
+                (case when (A.gmv>0 and A.h_gmv=0) then A.gmv when (A.gmv=0 and A.h_gmv=0) then 0 else (A.gmv-A.h_gmv)/A.h_gmv end ) as h_gmv_speed_ratio,
+                (case when (A.gmv>0 and A.t_gmv=0) then A.gmv when (A.gmv=0 and A.t_gmv=0) then 0 else (A.gmv-A.t_gmv)/A.t_gmv end ) as t_gmv_speed_ratio,
+                A.sales_count,
+                (case when A.sales_count=0 then 0 else A.gmv/A.sales_count end ) as unit_price,
+                A.avg_gmv_index,
+                A.h_avg_gmv_speed_ratio_index,
+                A.t_avg_gmv_speed_ratio_index
+            from (
+                select
+                    brand_id,
+                    brand,
+                    sum(market_gmv) as gmv,
+                    sum(market_gmv_week) as h_gmv,
+                    sum(market_gmv_same_period) as t_gmv,
+                    sum(sales_count) as sales_count,
+                    ${avgGmvIndex} as avg_gmv_index,
+                    ${hAvgGmvSpeedRatioIndex} as h_avg_gmv_speed_ratio_index,
+                    ${tAvgGmvSpeedRatioIndex} as t_avg_gmv_speed_ratio_index
+                from
+                    sjwj_cate_insight
+                    <!-- 过滤条件-->
+                    <include refid="whereScript"/>
+                group by brand_id,brand
+            ) AS A
+        ) AS B
+
+    </select>
+
+</mapper>
