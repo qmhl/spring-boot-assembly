@@ -6,24 +6,24 @@ server:
 spring:
   application:
     name: spring-boot-assembly
-redis
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 500
-        min-idle: 0
-    lettuce:
-      shutdown-timeout: 0
-  #mysql配置
+    #mysql配置
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/aiwriter?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: qmhl19232506
+    url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  jedis:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 500
+      min-idle: 0
+  lettuce:
+    shutdown-timeout: 0
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml   #mapper映射文件位置

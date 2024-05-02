@@ -14,7 +14,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
  */
 
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-@MapperScan(basePackages = {"o.geekidea.springboot.assembly.demo.dao"})
+@MapperScan(basePackages = {"io.geekidea.springboot.assembly.demo.dao"})
 public class Application {
 
     public static void main(String[] args) {

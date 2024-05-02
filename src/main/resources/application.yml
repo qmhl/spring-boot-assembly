@@ -8,6 +8,6 @@ spring:
 
   # 当前maven打包的profile
   profiles:
-    active: @profileActive@
+    active: '@profileActive@'
 
 hello: Hello spring-boot-assembly

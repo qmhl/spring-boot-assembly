@@ -7,6 +7,19 @@
 > 5. bin目录中是启动，停止，重启服务命令
 > 6. 打包后的目录结构类似于tomcat/maven目录结构
 
+## 注意事项
+1、执行mybatis的mapper文件时，发生org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):，可能是
+是否是编译的时候出问题，然后就去查看了target文件，看到mapper.xml没有编译进去，
+，idea有的时候没有编译生成相应的xml。在idea的target->classes下面没有找到相应的存在xml的文件夹，该文件夹里面有没有对应的mapper(实体名).xml文件
+解决方案：
+
+参考链接：
+https://blog.csdn.net/weixin_58563870/article/details/136321807?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-136321807-blog-105777976.235^v43^pc_blog_bottom_relevance_base8&spm=1001.2101.3001.4242.1&utm_relevant_index=3
+
+1、把mybatis的xml文件直接复制到target目录中 ,该方法可以解决问题，不过太麻烦了，每次都要手动复制，不太推挤使用
+2、在idea中，修改完xml文件后，先用maven的clean之后，然后重新编译compile，然后再去点击Application类进行启动；
+
+2、注意pom文件中<build><resources>目录，里面的资源文件要和工程中的resources目录一致，保证能编译到targer对应的目录中
 ## 代码托管
 
 > **[Github](https://github.com/geekidea/spring-boot-assembly)** | **[Gitee](https://gitee.com/geekideaio/spring-boot-assembly)**

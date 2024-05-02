@@ -14,7 +14,8 @@ public class Test2 {
         Date nowTime = new SimpleDateFormat(format).parse("09:27:02");
         Date startTime = new SimpleDateFormat(format).parse("09:27:00");
         Date endTime = new SimpleDateFormat(format).parse("09:27:59");
-        System.out.println(isEffectiveDate(nowTime, startTime, endTime));
+//        System.out.println(isEffectiveDate(nowTime, startTime, endTime));
+        System.out.println(System.currentTimeMillis());
     }
 
     /**

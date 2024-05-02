@@ -39,12 +39,12 @@ public class Test49_date测试 {
 
         //====================
         //两个日期后推
-        List str5 = DateUtil.getDateListAfterCal(date1, date2, 5);
-        System.out.println("/两个日期后推：" + str5);
-
-        //两个日期前推
-        List str6 = DateUtil.getDateListAfterCal(date1, date2, -5);
-        System.out.println("/两个日期前推：" + str6);
+//        List str5 = DateUtil.getDateListAfterCal(date1, date2, 5);
+//        System.out.println("/两个日期后推：" + str5);
+//
+//        //两个日期前推
+//        List str6 = DateUtil.getDateListAfterCal(date1, date2, -5);
+//        System.out.println("/两个日期前推：" + str6);
         // 下面方式和上面作用是一样的
 //        if (!CollectionUtils.isEmpty(param.getDtTimes()) && !CollectionUtils.isEmpty(param.getDtTimes().get(0))) {
 //            List<String> dtTime = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Test49_date测试 {
 
         // 计算去年的开始时间
         String str8 = DateUtil.getLastYearDate(date1);
-        System.out.println("/上个月的开始 结束时间：" + str8);
+        System.out.println("/去年这个时间：" + str8);
 
 //        getLastYearDate
 

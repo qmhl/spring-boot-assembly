@@ -1,6 +1,7 @@
 package io.geekidea.springboot.assembly.demo.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -70,5 +71,16 @@ public class FileUtil {
                 }
             }
         }
+    }
+
+    public static String cutUrlKey(String url) {
+        String[] split = StringUtils.split(url,"/");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0,len = split.length;i < len; i++) {
+            if (i > 1) {
+                stringBuilder.append("/").append(split[i]);
+            }
+        }
+        return stringBuilder.substring(1);
     }
 }

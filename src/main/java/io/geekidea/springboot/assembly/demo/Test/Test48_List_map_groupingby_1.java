@@ -31,7 +31,7 @@ public class Test48_List_map_groupingby_1 {
         Map<String, Map<String, List<User>>> collect
                 = list.stream().collect(
                 Collectors.groupingBy(
-                        User::getAddress, Collectors.groupingBy(User::getName)
+                        User::getAddress, Collectors.groupingBy(User::getName1)
                 )
         );
         System.out.println(JSON.toJSONString(collect));
@@ -46,7 +46,7 @@ public class Test48_List_map_groupingby_1 {
 
 
     private static String fetchGroupKey(User user){
-        return user.getName() +"#"+ user.getAddress();
+        return user.getName1() +"#"+ user.getAddress();
     }
 
 }
