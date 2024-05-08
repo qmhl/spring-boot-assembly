@@ -33,6 +33,9 @@ public class InsertUpdateController {
             SymbolSubmissionContentFailureRecord  build1= SymbolSubmissionContentFailureRecord.builder().id(id).build();
             SymbolSubmissionContentFailureRecord record = symbolSubmissionContentFailureRecordMapper.selectByExample(build1);
             if(record!=null){
+                record.setMessage("yyyyy");
+                record.setStatus(3);
+                record.setModifyTime(new Date());
                 symbolSubmissionContentFailureRecordMapper.insertOrUpdate(record);
             }
         } else {

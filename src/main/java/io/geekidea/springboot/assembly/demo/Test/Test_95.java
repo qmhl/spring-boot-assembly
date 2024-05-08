@@ -1,9 +1,15 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
+import com.alibaba.fastjson.JSON;
+import io.geekidea.springboot.assembly.demo.model.Person;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * 参考链接：  https://blog.csdn.net/weixin_49114503/article/details/135196097
@@ -28,6 +34,28 @@ public class Test_95 {
         int i = url.lastIndexOf("/");
         String fileName = url.substring(i + 1);
         System.out.println(fileName);
+
+        List<Person> list = new ArrayList<>();
+        list.add(new Person("zhangsan",1));
+        list.add(new Person("lisi",2));
+
+        Optional.ofNullable(list).ifPresent(recordList -> {
+            recordList.forEach(o -> {
+                System.out.println(JSON.toJSONString(o));
+            });
+        });
+
+        String contentId = "123 ";
+        String styleId = " 67 ";
+        Pattern p = Pattern.compile("\\d+");
+        System.out.println(p.matcher(contentId).matches());
+        System.out.println(p.matcher(styleId).matches());
+
+//        if (!p.matcher(contentId).matches() || !p.matcher(styleId).matches()){
+//            System.out.println("error");
+//        }else{
+//            System.out.println("right");
+//        }
 
     }
 

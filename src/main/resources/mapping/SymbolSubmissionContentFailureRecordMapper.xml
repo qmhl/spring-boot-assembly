@@ -13,9 +13,13 @@
         VALUES
         (#{id}, #{entityId}, #{symbolId}, #{opType}, #{message}, #{failureReason}, #{status}, #{creator}, now(), #{modifier}, now())
         ON DUPLICATE KEY UPDATE
+        entity_id =VALUES(entity_id),
+        symbol_id =VALUES(symbol_id),
+        op_type =VALUES(op_type),
+        message =VALUES(message),
         failure_reason =VALUES(failure_reason),
         status =VALUES(status),
-        modify_time =VALUES(modify_time)
+        modify_time =now()
 
     </insert>
 

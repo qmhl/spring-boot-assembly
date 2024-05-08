@@ -29,9 +29,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @AllArgsConstructor
@@ -98,7 +96,8 @@ public class CSVController {
         List<List<String>> lists = readFromCommonsCSV0("/Users/zhangqi1092/Desktop/tets/csvData.csv");
         String prefix = fileName.substring(fileName.lastIndexOf("."));
         System.out.println("prefix: "+ prefix);
-        System.out.println(lists);
+        System.out.println("size: "+lists.size());
+        System.out.println("lists: "+lists);
 //        List<User> list1 = readFromCommonsCSV("/Users/zhangqi1092/Desktop/tets/csvData.csv");
 //        System.out.println(list1);
         List list2 = readFromCommonsCSV2( "/Users/zhangqi1092/Desktop/tets/csvData.csv");
@@ -126,7 +125,7 @@ public class CSVController {
      * @return List<User>
      */
     public static List<List<String>> readFromCommonsCSV0(String fileName) throws IOException {
-        List<List<String>> res = new ArrayList<>();
+        Set<List<String>> res = new HashSet<>();
 
         CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader();
         FileReader fileReader = new FileReader(fileName);
@@ -136,7 +135,7 @@ public class CSVController {
             csvRecord.forEach(row::add);
             res.add(row);
         });
-        return res;
+        return new ArrayList<>(res);
     }
 
     public static List<User> readFromCommonsCSV(String fileName) {
