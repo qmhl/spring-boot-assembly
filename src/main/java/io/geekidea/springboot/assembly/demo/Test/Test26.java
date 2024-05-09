@@ -2,12 +2,8 @@ package io.geekidea.springboot.assembly.demo.Test;
 
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
-import com.sun.org.apache.bcel.internal.generic.ANEWARRAY;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
