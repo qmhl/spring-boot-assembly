@@ -98,6 +98,10 @@ public class CSVController {
         System.out.println("prefix: "+ prefix);
         System.out.println("size: "+lists.size());
         System.out.println("lists: "+lists);
+
+        int i = readCsvHeader(fileName);
+        System.out.println("csv的表头: "+i);
+
 //        List<User> list1 = readFromCommonsCSV("/Users/zhangqi1092/Desktop/tets/csvData.csv");
 //        System.out.println(list1);
         List list2 = readFromCommonsCSV2( "/Users/zhangqi1092/Desktop/tets/csvData.csv");
@@ -136,6 +140,19 @@ public class CSVController {
             res.add(row);
         });
         return new ArrayList<>(res);
+    }
+
+
+    public static int readCsvHeader(String fileName) throws IOException {
+        Set<List<String>> res = new HashSet<>();
+
+        CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader();
+        FileReader fileReader = new FileReader(fileName);
+        CSVParser csvParser = new CSVParser(fileReader, csvFormat);
+        Map<String, Integer> headerMap = csvParser.getHeaderMap();
+        System.out.println(JSON.toJSONString(headerMap));
+
+        return headerMap.keySet().size();
     }
 
     public static List<User> readFromCommonsCSV(String fileName) {
