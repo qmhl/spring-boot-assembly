@@ -51,6 +51,11 @@ public class Test_95 {
         System.out.println(p.matcher(contentId).matches());
         System.out.println(p.matcher(styleId).matches());
 
+        Integer a =678;
+        Integer b =678;
+        System.out.println("a==b: "+ (a==b));
+        System.out.println("a equal b: "+ (a.equals(b)));
+
 //        if (!p.matcher(contentId).matches() || !p.matcher(styleId).matches()){
 //            System.out.println("error");
 //        }else{
