@@ -16,6 +16,7 @@ public class Test_csv {
         Long aLong = parseExcelFromCsvUrl0(fileName);
         System.out.println(aLong);
         System.out.println("总数："+aLong);
+        System.out.println("总数2："+aLong);
     }
 
     private static Long parseExcelFromCsvUrl0(String fileName) throws Exception {
