@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import io.geekidea.springboot.assembly.demo.entity.Apple;
 import io.geekidea.springboot.assembly.demo.model.RestResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,10 +19,17 @@ import java.util.Map;
 @Slf4j
 public class TestController3 {
 
+    @Value("#{${maps}}")
+    public Map<String,String> maps;
 
     @GetMapping("/query1")
     public RestResponse query1(Long id) throws IOException {
         return RestResponse.ok(id );
+    }
+
+    @GetMapping("/configMap")
+    public RestResponse configMap() throws IOException {
+        return RestResponse.ok(maps);
     }
     @PostMapping("/query")
     public RestResponse query(@RequestParam("id") Long id, @RequestBody List<Apple> apple) throws IOException {

@@ -1,9 +1,7 @@
 package io.geekidea.springboot.assembly.demo.model;
 
 import lombok.Data;
-import org.springframework.util.CollectionUtils;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,10 +3,9 @@ package io.geekidea.springboot.assembly.demo.utils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -83,4 +82,34 @@ public class FileUtil {
         }
         return stringBuilder.substring(1);
     }
+
+    /**
+     * 读取文件
+     * @param fileName
+     * @return     git clone https://your_username:your_token@github.com/username/your_repo.git
+
+     * @throws IOException
+     */
+    //
+    public static List<String>  readStringList(String  fileName) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(fileName));
+        for (String line : lines) {
+            System.out.println(line);
+        }
+        return lines;
+    }
+
+    public static long  getCount(String  fileName) throws IOException {
+        long lineCount = Files.lines(Paths.get("path/to/your/file.txt")).count();
+        return lineCount ;
+    }
+
+//    public static List<String>  getStringList(String  fileName) throws IOException {
+//        List<String> lines = Files.readAllLines(Paths.get(fileName));
+//        for (String line : lines) {
+//            System.out.println(line);
+//        }
+//        return lines;
+//    }
+    
 }
