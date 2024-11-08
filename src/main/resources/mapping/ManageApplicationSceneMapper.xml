@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.geekidea.springboot.assembly.demo.dao.ManageApplicationSceneMapper">
+
+
+    <insert id="insert" parameterType="io.geekidea.springboot.assembly.demo.entity.ManageApplicationScene" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+
+        INSERT INTO manage_application_scene (pid, name_cn, name_en, is_leaf, level, description, creator, modifier, create_time, modify_time)
+        VALUES (#{pid}, #{nameCn}, #{nameEn}, #{isLeaf}, #{level}, #{description}, #{creator}, #{modifier}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <select id="select" resultType="io.geekidea.springboot.assembly.demo.entity.ManageApplicationScene">
+        select id,pid,name_cn from manage_application_scene
+    </select>
+
+    <select id="selectById" resultType="io.geekidea.springboot.assembly.demo.entity.ManageApplicationScene">
+
+        select * from manage_application_scene  where id = #{id}
+
+    </select>
+
+    <select id="selectIdByNameAndLevelAndPid" resultType="java.lang.Long">
+        SELECT id
+        FROM manage_application_scene
+        WHERE name_cn = #{name} AND level = #{level} AND (pid = #{pid} OR #{pid} IS NULL) AND MD5(name_cn)=#{md5}
+    </select>
+</mapper>
