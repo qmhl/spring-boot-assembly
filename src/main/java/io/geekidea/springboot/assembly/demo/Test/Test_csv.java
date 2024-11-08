@@ -1,16 +1,10 @@
 package io.geekidea.springboot.assembly.demo.Test;
 
-import com.alibaba.fastjson.JSON;
-import com.google.common.base.Splitter;
-import io.geekidea.springboot.assembly.demo.Exception.BusinessException;
-import io.geekidea.springboot.assembly.demo.utils.ObjectUtil;
+import io.geekidea.springboot.assembly.demo.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * 参考链接：  https://blog.csdn.net/weixin_49114503/article/details/135196097
@@ -63,7 +57,7 @@ public class Test_csv {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     // 处理每一行，这里仅打印出来
-                    List<String> list1 = Splitter.on(',').omitEmptyStrings().trimResults().splitToList(line);
+                    List<String> list1 = StringUtil.split(line, ",");
                     list.add(list1);
                     total++;
                 }
